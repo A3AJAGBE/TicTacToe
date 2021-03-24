@@ -31,19 +31,26 @@ def game():
     while game_start:
 
         try:
+            print(f"It's your move, player '{current_player}'")
             game_move = int(input('What position is your game move? '))
         except ValueError:
             print('Input must be an integer.\n')
 
         if game_move < 1 or game_move > 9:
             print('Invalid input, must be between 1 and 9.\n')
-        elif gamePositions[game_move] != ' ':
+        if gamePositions[game_move] != ' ':
             print('Position occupied, Play again\n')
         else:
             gamePositions[game_move] = current_player
             playerPositions[current_player].append(game_move)
 
         game_design(gamePositions)
+
+        # Switch players after every move
+        if current_player == 'X':
+            current_player = 'O'
+        else:
+            current_player = 'X'
 
 
 game()
