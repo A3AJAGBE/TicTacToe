@@ -73,7 +73,15 @@ def game():
 
         if game_status(playerPositions, current_player):
             game_design(gamePositions)
-            game_start = False
+
+            gameContinue = input("Do you want to play again? (Yes or No) ").title()
+
+            if gameContinue == 'Yes':
+                clear()
+                game()
+            else:
+                game_start = False
+                print('Thank you for using this application.')
         else:
             game_design(gamePositions)
 
