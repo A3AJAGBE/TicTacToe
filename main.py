@@ -27,14 +27,15 @@ def game_status(player_positions, current_player):
     """This function checks for the status of the game"""
     winningCombinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 
+    for combo in winningCombinations:
+        if all(playedCombo in player_positions[current_player] for playedCombo in combo):
+            print(f"Player '{current_player}' won the game.")
+            return True
+
     if len(player_positions['X']) + len(player_positions['O']) == 9:
         print("It's a Draw.")
         return True
-    else:
-        for combo in winningCombinations:
-            if all(playedCombo in player_positions[current_player] for playedCombo in combo):
-                print(f"Player '{current_player}' won the game.")
-                return True
+
     return False
 
 
@@ -79,9 +80,12 @@ def game():
             if gameContinue == 'Yes':
                 clear()
                 game()
-            else:
+            elif gameContinue == 'No':
                 game_start = False
                 print('Thank you for using this application.')
+            else:
+                game_start = False
+                print('Invalid response, Game Over.')
         else:
             game_design(gamePositions)
 
